@@ -4,22 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>3D Model Scrolling</title>
-  <!-- Reference Three.js from jsDelivr CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/three@r132/build/three.min.js"></script>
-  <!-- Reference FBXLoader.js from jsDelivr CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/three@r132/examples/js/loaders/FBXLoader.js"></script>
-  <!-- Reference fflate.js from jsDelivr CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/fflate@1.0.10/dist/fflate.min.js"></script>
-  <style>
-    body { margin: 0; overflow: hidden; }
-    #3d-container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-  </style>
-  <!-- Prevent the browser from attempting to load a favicon.ico -->
-  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-</head>
-<body>
-  <div id="3d-container"></div>
-  <script>
+  <!-- Reference Three.js and FBXLoader.js from jsDelivr CDN -->
+  <script type="module">
+    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@r132/build/three.module.min.js';
+    import { FBXLoader } from 'https://cdn.jsdelivr.net/npm/three@r132/examples/js/loaders/FBXLoader.js';
+    
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     var renderer = new THREE.WebGLRenderer();
@@ -42,7 +31,7 @@
     }
 
     // Replace the cube with your 3D model
-    var loader = new THREE.FBXLoader();
+    var loader = new FBXLoader();
     var model;
 
     loader.load('https://raw.githubusercontent.com/ermheld/Brain-Project/main/brain.fbx', function (object) {
@@ -56,5 +45,7 @@
 
     animate();
   </script>
+</head>
+<body>
 </body>
 </html>
