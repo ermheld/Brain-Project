@@ -4,10 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>3D Model Scrolling</title>
-  <!-- Reference Three.js from GitHub -->
-  <script src="https://github.com/ermheld/Brain-Project/raw/main/three.module.min.js"></script>
-  <!-- Reference FBXLoader.js from GitHub -->
-  <script src="https://raw.githubusercontent.com/ermheld/Brain-Project/main/FBXLoader.js"></script>
+  <!-- You may need to change the URLs for Three.js and FBXLoader.js if you're hosting them elsewhere -->
+  <script src="https://cdn.jsdelivr.net/npm/three@r132/build/three.module.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@r132/examples/js/loaders/FBXLoader.js"></script>
   <style>
     body { margin: 0; }
     #3d-container { position: absolute; top: 0; left: 0; }
@@ -43,7 +42,8 @@
     var loader = new THREE.FBXLoader();
     var model;
 
-    loader.load('https://github.com/ermheld/Brain-Project/raw/main/brain.fbx', function (object) {
+    // You need to change the URL to your brain model hosted on GitHub or elsewhere
+    loader.load('https://raw.githubusercontent.com/ermheld/Brain-Project/main/brain.fbx', function (object) {
       model = object;
       scene.add(model);
     }, undefined, function (error) {
