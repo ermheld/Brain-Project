@@ -5,19 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>3D Model Scrolling</title>
   <!-- Reference fflate.min.js from jsDelivr CDN -->
-  <script type="module" src="https://cdn.jsdelivr.net/npm/fflate@1.0.10/dist/fflate.module.min.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/fflate@1.0.10/dist/fflate.module.min.mjs"></script>
   <!-- Reference Three.js from jsDelivr CDN -->
-  <script type="module" src="https://cdn.jsdelivr.net/npm/three@r132/build/three.module.min.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/three@r161/build/three.module.min.mjs"></script>
   <!-- Reference FBXLoader.js from jsDelivr CDN -->
-  <script type="module" src="https://cdn.jsdelivr.net/npm/three@r132/examples/js/loaders/FBXLoader.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/three@r161/examples/jsm/loaders/FBXLoader.js"></script>
   <style>
-    body { margin: 0; overflow: hidden; }
+    body { margin: 0; }
     #3d-container { position: absolute; top: 0; left: 0; }
   </style>
+  <!-- Prevent the browser from attempting to load a favicon.ico -->
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
 <body>
   <div id="3d-container"></div>
-  <script type="module">
+  <script>
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     var renderer = new THREE.WebGLRenderer();
@@ -30,8 +32,7 @@
     var cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
 
-    // Adjust camera position
-    camera.position.set(0, 0, 10);
+    camera.position.z = 5;
 
     function animate() {
       requestAnimationFrame(animate);
@@ -46,8 +47,6 @@
 
     loader.load('https://raw.githubusercontent.com/ermheld/Brain-Project/main/brain.fbx', function (object) {
       model = object;
-      // Center the model in the scene
-      model.position.set(0, 0, 0);
       scene.add(model);
     }, undefined, function (error) {
       console.error(error);
