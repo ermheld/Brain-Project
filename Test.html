@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Model Scrolling</title>
+  <!-- Reference Three.js from GitHub -->
+  <script src="https://threejs.org/build/three.min.js"></script>
+  <!-- Reference FBXLoader.js from GitHub -->
+  <script src="https://threejs.org/examples/js/loaders/FBXLoader.js"></script>
+  <style>
+    body { margin: 0; }
+    #3d-container { position: absolute; top: 0; left: 0; }
+  </style>
+  <!-- Prevent the browser from attempting to load a favicon.ico -->
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+</head>
+<body>
+  <div id="3d-container"></div>
+  <script>
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.getElementById('3d-container').appendChild(renderer.domElement);
+
+    // Create a simple cube
+    var geometry = new THREE.BoxGeometry();
+    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    var cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+
+    camera.position.z = 5;
+
+    function animate() {
+      requestAnimationFrame(animate);
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
+      renderer.render(scene, camera);
+    }
+
+    // Replace the cube with your 3D model
+    var loader = new THREE.FBXLoader();
+    var model;
+
+    loader.load('https://raw.githubusercontent.com/ermheld/Brain-Project/main/brain.fbx', function (object) {
+      model = object;
+      scene.add(model);
+    }, undefined, function (error) {
+      console.error(error);
+    });
+
+    animate();
+  </script>
+</body>
+</html>
