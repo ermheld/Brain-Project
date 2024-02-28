@@ -4,10 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>3D Model Scrolling</title>
+  <!-- Reference fflate.min.js from jsDelivr CDN -->
+  <script type="module" src="https://cdn.jsdelivr.net/npm/fflate@1.0.10/dist/fflate.module.min.js"></script>
   <!-- Reference Three.js from jsDelivr CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r132/three.min.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/three@r132/build/three.module.min.js"></script>
   <!-- Reference FBXLoader.js from jsDelivr CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r132/examples/js/loaders/FBXLoader.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/three@r132/examples/js/loaders/FBXLoader.js"></script>
   <style>
     body { margin: 0; overflow: hidden; }
     #3d-container { position: absolute; top: 0; left: 0; }
@@ -15,7 +17,7 @@
 </head>
 <body>
   <div id="3d-container"></div>
-  <script>
+  <script type="module">
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     var renderer = new THREE.WebGLRenderer();
@@ -28,7 +30,8 @@
     var cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
 
-    camera.position.z = 5;
+    // Adjust camera position
+    camera.position.set(0, 0, 10);
 
     function animate() {
       requestAnimationFrame(animate);
