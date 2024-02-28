@@ -4,18 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>3D Model Scrolling</title>
-  <!-- Reference fflate.min.js from jsDelivr CDN -->
-  <script type="module" src="https://cdn.jsdelivr.net/npm/fflate@1.0.10/dist/fflate.module.min.mjs"></script>
-  <!-- Reference Three.js from jsDelivr CDN -->
-  <script type="module" src="https://cdn.jsdelivr.net/npm/three@r161/build/three.module.min.mjs"></script>
-  <!-- Reference FBXLoader.js from jsDelivr CDN -->
-  <script type="module" src="https://cdn.jsdelivr.net/npm/three@r161/examples/jsm/loaders/FBXLoader.js"></script>
+  <!-- Reference Three.js from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/three@r132/build/three.module.min.js"></script>
+  <!-- Reference FBXLoader.js from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/three@r132/examples/js/loaders/FBXLoader.js"></script>
+  <!-- Prevent the browser from attempting to load a favicon.ico -->
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
   <style>
     body { margin: 0; }
     #3d-container { position: absolute; top: 0; left: 0; }
   </style>
-  <!-- Prevent the browser from attempting to load a favicon.ico -->
-  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
 <body>
   <div id="3d-container"></div>
