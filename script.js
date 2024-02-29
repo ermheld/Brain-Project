@@ -2,7 +2,6 @@
 function updateAnatomicalStructures(pathway) {
   var structures = [];
   var structuresList = document.getElementById("anatomical-structures");
-  var pathwayTitle = document.getElementById("pathway-title");
 
   // Clear previous contents
   structuresList.innerHTML = "";
@@ -317,57 +316,45 @@ function updateAnatomicalStructures(pathway) {
       ];
       break;
     default:
-      break;
+      structures = [{ name: "Select a pathway to view structures", description: "", lesions: "", pharmacologicalAgents: "" }];
   }
 
-  // Update the pathway title
-  pathwayTitle.textContent = pathway === "default" ? "Select a Pathway" : pathway;
+  // Populate the list with the structures
+  structures.forEach(function(structure) {
+    var listItem = document.createElement("div");
+    listItem.classList.add("structure");
 
-  // Populate the structures list
-  structures.forEach(function (structure) {
-    var listItem = document.createElement("li");
     var structureName = document.createElement("h3");
-    var structureDescription = document.createElement("p");
-    var lesionsHeader = document.createElement("h4");
-    var lesionsContent = document.createElement("p");
-    var pharmacologicalAgentsHeader = document.createElement("h4");
-    var pharmacologicalAgentsContent = document.createElement("p");
-
-    // Structure Name
     structureName.textContent = structure.name;
-    listItem.appendChild(structureName);
 
-    // Structure Description
+    var structureDescription = document.createElement("p");
     structureDescription.textContent = structure.description;
-    listItem.appendChild(structureDescription);
 
-    // Lesions
-    lesionsHeader.textContent = "Lesions:";
-    listItem.appendChild(lesionsHeader);
+    var lesionsTitle = document.createElement("h4");
+    lesionsTitle.textContent = "Lesions";
+    var lesionsContent = document.createElement("p");
     lesionsContent.textContent = structure.lesions;
-    listItem.appendChild(lesionsContent);
 
-    // Pharmacological Agents
-    pharmacologicalAgentsHeader.textContent = "Pharmacological Agents:";
-    listItem.appendChild(pharmacologicalAgentsHeader);
+    var pharmacologicalAgentsTitle = document.createElement("h4");
+    pharmacologicalAgentsTitle.textContent = "Pharmacological Agents";
+    var pharmacologicalAgentsContent = document.createElement("p");
     pharmacologicalAgentsContent.textContent = structure.pharmacologicalAgents;
+
+    listItem.appendChild(structureName);
+    listItem.appendChild(structureDescription);
+    listItem.appendChild(lesionsTitle);
+    listItem.appendChild(lesionsContent);
+    listItem.appendChild(pharmacologicalAgentsTitle);
     listItem.appendChild(pharmacologicalAgentsContent);
 
     structuresList.appendChild(listItem);
   });
 }
 
-// Function to initialize the page
-function initializePage() {
-  // Populate the dropdown menu
-  var pathwayDropdown = document.getElementById("pathway-dropdown");
-  pathwayDropdown.addEventListener("change", function () {
-    updateAnatomicalStructures(this.value);
-  });
-
-  // Initially load structures for the default pathway
-  updateAnatomicalStructures("default");
-}
-
-// Call the initialize function when the DOM is ready
-document.addEventListener("DOMContentLoaded", initializePage);
+// Add an event listener to the dropdown menu
+document.getElementById("pathway-select").addEventListener("change", function() {
+    // Get the selected pathway
+    var selectedPathway = this.value;
+    // Call the function to update anatomical structures with the selected pathway
+    updateAnatomicalStructures(selectedPathway);
+});
