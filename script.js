@@ -10,7 +10,7 @@ function updateAnatomicalStructures(pathway) {
   var structures = [];
 
   switch (pathway) {
-    case "reward":
+    case "default":
       structures = [
         {
           name: "Frontal Lobe",
