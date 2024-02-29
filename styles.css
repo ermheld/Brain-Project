@@ -1,9 +1,11 @@
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: linear-gradient(to bottom right, #87CEFA, #FF00FF, #800080);
+  background-repeat: no-repeat; /* Prevent background from repeating */
   margin: 0;
   padding: 0;
 }
+
 
 .container {
   display: flex;
