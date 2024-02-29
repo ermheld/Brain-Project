@@ -110,15 +110,15 @@ function updateAnatomicalStructures(pathway) {
       structures = [
         {
           name: "Prefrontal Cortex",
-          description: "Part of the mesocortical pathway, involved in cognitive control, decision making, and social behavior. Dysfunction may lead to deficits in executive functions and emotional regulation.",
-          lesions: "Lesions or dysfunction in the prefrontal cortex may result from traumatic brain injury, neurodevelopmental disorders, or neurodegenerative diseases.",
-          pharmacologicalAgents: "Pharmacological agents targeting this area include atypical antipsychotics for schizophrenia and antidepressants for mood disorders.",
+          description: "Involved in executive functions, such as planning, decision-making, and impulse control. Lesions may result in deficits in cognition, personality, and social behavior.",
+          lesions: "Lesions in the prefrontal cortex may result from traumatic brain injury, stroke, or neurodegenerative diseases.",
+          pharmacologicalAgents: "Pharmacological agents targeting this area include dopamine agonists for Parkinson's disease and antipsychotics for schizophrenia.",
         },
         {
-          name: "Anterior Cingulate Cortex",
-          description: "Involved in emotional processing, regulation, and cognitive functions such as attention and error detection. Dysfunction may lead to deficits in emotional regulation and attentional control.",
-          lesions: "Lesions or dysfunction in the anterior cingulate cortex may result from stroke, trauma, or neurodegenerative diseases.",
-          pharmacologicalAgents: "Pharmacological agents targeting this area include selective serotonin reuptake inhibitors (SSRIs) for depression and antiepileptic drugs for mood stabilization.",
+          name: "Anterior Cingulate Cortex (ACC)",
+          description: "Part of the limbic system, involved in emotions, cognitive processing, and pain perception. Lesions may result in deficits in emotion regulation and cognitive control.",
+          lesions: "Lesions in the anterior cingulate cortex may result from stroke, traumatic brain injury, or neurodegenerative diseases.",
+          pharmacologicalAgents: "Pharmacological agents targeting this area include selective serotonin reuptake inhibitors (SSRIs) for depression and analgesics for pain management.",
         },
         // Add more structures as needed
       ];
@@ -126,16 +126,16 @@ function updateAnatomicalStructures(pathway) {
     case "mesostriatal":
       structures = [
         {
-          name: "Striatum",
-          description: "Part of the mesostriatal pathway, involved in reward processing, motor control, and habit formation. Dysfunction may lead to motor deficits and impaired reward learning.",
-          lesions: "Lesions or dysfunction in the striatum may result from stroke, neurodegenerative diseases, or exposure to neurotoxins.",
+          name: "Substantia Nigra",
+          description: "Produces dopamine and is involved in reward, movement, and addiction. Lesions may result in motor deficits, such as bradykinesia and rigidity.",
+          lesions: "Lesions in the substantia nigra may result from Parkinson's disease, stroke, or neurodegenerative diseases.",
           pharmacologicalAgents: "Pharmacological agents targeting this area include dopamine agonists for Parkinson's disease and antipsychotics for psychosis.",
         },
         {
-          name: "Substantia Nigra",
-          description: "Produces dopamine and is crucial for movement control. Dysfunction may lead to Parkinson's disease characterized by tremors, rigidity, and bradykinesia.",
-          lesions: "Lesions or dysfunction in the substantia nigra may result from neurodegenerative diseases, toxins, or vascular damage.",
-          pharmacologicalAgents: "Pharmacological agents targeting this area include levodopa for Parkinson's disease and monoamine oxidase inhibitors (MAOIs) for depression.",
+          name: "Striatum",
+          description: "Involved in motor control, reward processing, and learning. Lesions may result in motor deficits and cognitive impairments.",
+          lesions: "Lesions in the striatum may result from stroke, traumatic brain injury, or neurodegenerative diseases.",
+          pharmacologicalAgents: "Pharmacological agents targeting this area include dopamine agonists for Parkinson's disease and antipsychotics for psychosis.",
         },
         // Add more structures as needed
       ];
@@ -143,16 +143,16 @@ function updateAnatomicalStructures(pathway) {
     case "tuberoinfundibular":
       structures = [
         {
-          name: "Hypothalamus",
-          description: "Part of the tuberoinfundibular pathway, involved in regulating hormone secretion, hunger, thirst, and body temperature. Dysfunction may lead to endocrine disorders and metabolic abnormalities.",
-          lesions: "Lesions or dysfunction in the hypothalamus may result from tumors, trauma, or neurodegenerative diseases.",
-          pharmacologicalAgents: "Pharmacological agents targeting this area include hormone replacement therapy for endocrine disorders and antipsychotics for psychosis.",
+          name: "Median Eminence",
+          description: "Part of the hypothalamus, involved in neuroendocrine regulation. Lesions may result in hormonal imbalances, such as hypopituitarism.",
+          lesions: "Lesions in the median eminence may result from tumors, trauma, or neurodegenerative diseases.",
+          pharmacologicalAgents: "Pharmacological agents targeting this area include dopamine agonists for prolactinoma and growth hormone for growth hormone deficiency.",
         },
         {
           name: "Pituitary Gland",
-          description: "Produces and releases hormones that regulate various bodily functions, including growth, metabolism, and reproduction. Dysfunction may lead to hormonal imbalances and pituitary disorders.",
-          lesions: "Lesions or dysfunction in the pituitary gland may result from tumors, vascular abnormalities, or autoimmune diseases.",
-          pharmacologicalAgents: "Pharmacological agents targeting this area include hormone replacement therapy for hormone deficiencies and dopamine agonists for prolactinomas.",
+          description: "Master endocrine gland, involved in hormone secretion and regulation. Lesions may result in hormonal imbalances and endocrine disorders.",
+          lesions: "Lesions in the pituitary gland may result from tumors, ischemia, or inflammation.",
+          pharmacologicalAgents: "Pharmacological agents targeting this area include glucocorticoids for adrenal insufficiency and thyroid hormone replacement for hypothyroidism.",
         },
         // Add more structures as needed
       ];
@@ -161,14 +161,14 @@ function updateAnatomicalStructures(pathway) {
       structures = [
         {
           name: "Ventral Tegmental Area (VTA)",
-          description: "Part of the mesolimbic pathway, involved in reward processing, motivation, and reinforcement learning. Dysfunction may lead to addiction and mood disorders.",
+          description: "Produces dopamine, a key neurotransmitter in the reward system. Dysfunction may lead to depression or addiction.",
           lesions: "Lesions or dysfunction in the ventral tegmental area may result from chronic stress, drug abuse, or neurodegenerative diseases.",
-          pharmacologicalAgents: "Pharmacological agents targeting this area include dopamine agonists or antagonists for addiction treatment and antidepressants for mood disorders.",
+          pharmacologicalAgents: "Pharmacological agents targeting this area include dopamine reuptake inhibitors for depression and antipsychotics for psychosis.",
         },
         {
           name: "Nucleus Accumbens",
-          description: "Part of the mesolimbic pathway, involved in reward processing, pleasure, and reinforcement. Dysfunction may lead to addiction and mood disorders.",
-          lesions: "Lesions or dysfunction in the nucleus accumbens may result from chronic drug use, neurodegenerative diseases, or trauma.",
+          description: "Part of the reward pathway, involved in pleasure, reinforcement, and motivation. Lesions or dysfunction may lead to anhedonia, addiction, or depression.",
+          lesions: "Lesions in the nucleus accumbens may result from chronic drug use, neurodegenerative diseases, or trauma.",
           pharmacologicalAgents: "Pharmacological agents targeting this area include dopamine agonists or antagonists for addiction treatment and antidepressants for mood disorders.",
         },
         // Add more structures as needed
@@ -178,15 +178,15 @@ function updateAnatomicalStructures(pathway) {
       structures = [
         {
           name: "Amygdala",
-          description: "Key in fear conditioning, emotional processing, and memory consolidation. Dysfunction may lead to anxiety disorders and impaired fear learning.",
-          lesions: "Lesions or dysfunction in the amygdala may result from trauma, neurodevelopmental disorders, or neurodegenerative diseases.",
-          pharmacologicalAgents: "Pharmacological agents targeting this area include anxiolytics such as benzodiazepines for anxiety disorders and antidepressants for mood disorders.",
+          description: "Key in processing emotions, particularly fear and aggression. Lesions may result in deficits in emotional processing and regulation.",
+          lesions: "Lesions in the amygdala may result from traumatic brain injury, epilepsy, or neurodegenerative diseases.",
+          pharmacologicalAgents: "Pharmacological agents targeting this area include anxiolytics such as benzodiazepines for anxiety disorders.",
         },
         {
-          name: "Prefrontal Cortex",
-          description: "Involved in fear extinction and regulation of emotional responses. Dysfunction may lead to deficits in fear extinction and emotional dysregulation.",
-          lesions: "Lesions or dysfunction in the prefrontal cortex may result from trauma, neurodevelopmental disorders, or neurodegenerative diseases.",
-          pharmacologicalAgents: "Pharmacological agents targeting this area include atypical antipsychotics for psychosis and antidepressants for mood disorders.",
+          name: "Hippocampus",
+          description: "Crucial for memory formation and spatial navigation. Lesions may result in deficits in memory consolidation and spatial orientation.",
+          lesions: "Lesions in the hippocampus may result from stroke, epilepsy, or neurodegenerative diseases such as Alzheimer's disease.",
+          pharmacologicalAgents: "Pharmacological agents targeting this area include acetylcholinesterase inhibitors for Alzheimer's disease.",
         },
         // Add more structures as needed
       ];
