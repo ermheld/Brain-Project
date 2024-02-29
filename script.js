@@ -1,6 +1,11 @@
 // Function to update the list of anatomical structures
 function updateAnatomicalStructures(pathway) {
   var structures = [];
+  var structuresList = document.getElementById("anatomical-structures");
+
+  // Clear previous contents
+  structuresList.innerHTML = "";
+
   // Logic to update the list of anatomical structures based on selected pathway
   switch (pathway) {
     case "default":
@@ -55,11 +60,6 @@ function updateAnatomicalStructures(pathway) {
       structures = ["Select a pathway to view structures"];
   }
 
-  var structuresList = document.getElementById("anatomical-structures");
-
-  // Clear previous contents
-  structuresList.innerHTML = "";
-
   // Populate the list with the structures
   structures.forEach(function(structure) {
     var listItem = document.createElement("li");
@@ -67,3 +67,9 @@ function updateAnatomicalStructures(pathway) {
     structuresList.appendChild(listItem);
   });
 }
+
+// Event listener for pathway select dropdown
+document.getElementById('pathway-select').addEventListener('change', function() {
+  var selectedPathway = this.value;
+  updateAnatomicalStructures(selectedPathway);
+});
