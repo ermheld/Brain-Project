@@ -5,44 +5,35 @@ body {
 
 .container {
   display: flex;
-  height: 100vh;
 }
 
 .left-panel {
   flex: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* Align items to the left */
   padding: 20px;
 }
 
 .right-panel {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* Align items to the top */
-  align-items: center; /* Center items horizontally */
   padding: 20px;
 }
 
+.brain-image {
+  width: 100%; /* Ensure the image covers the left two-thirds of the screen */
+}
+
 #pathway-select {
-  margin-bottom: 20px; /* Move dropdown below the title */
+  margin-top: 20px;
   padding: 10px;
-  font-size: 20px; /* Increase font size */
+  font-size: 16px;
   border-radius: 5px;
 }
 
 #pathway-title {
-  font-size: 24px; /* Increase font size for the title */
-  font-weight: bold; /* Make title bold */
-  margin-bottom: 20px; /* Add space below the title */
+  font-size: 24px;
+  font-weight: bold;
 }
 
 #anatomical-structures {
   font-size: 16px;
-  list-style-type: none; /* Remove bullets from the list */
-}
-
-#anatomical-structures li {
-  font-weight: bold; /* Make structure names bold */
+  list-style-type: none;
 }
