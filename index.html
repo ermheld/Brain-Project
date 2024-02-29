@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Neuroanatomy Platform</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="left-panel">
+      <select id="pathway-select">
+        <option value="" disabled selected>Select Pathway</option>
+        <option value="default">Default</option>
+        <option value="reward">Reward Pathway</option>
+        <option value="limbic">Limbic System</option>
+        <option value="language">Language Pathways</option>
+        <option value="vision">Vision Pathways</option>
+      </select>
+      <div id="brain-container">
+        <!-- Brain representation will be rendered here -->
+        <img src="Brain_default.png" alt="Brain">
+      </div>
+    </div>
+    <div class="right-panel">
+      <div id="anatomical-structures">
+        <!-- Anatomical structures will be listed here -->
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

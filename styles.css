@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: linear-gradient(to bottom right, #78aaff, #ff77a9);
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.left-panel {
+  flex: 1;
+  padding: 20px;
+}
+
+.right-panel {
+  flex: 1;
+  padding: 20px;
+}
+
+#pathway-select {
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+#brain-container {
+  /* Styling for brain representation */
+}
+
+#brain-container img {
+  width: 60%; /* Make the image 40% smaller */
+  display: block;
+  margin: 0 auto; /* Center the image horizontally */
+}
+
+#anatomical-structures {
+  /* Styling for anatomical structures list */
+}
