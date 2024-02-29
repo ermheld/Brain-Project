@@ -4,31 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Interactive Neuroanatomy Platform</title>
-  <link rel="stylesheet" href="https://ermheld.github.io/Brain-Project/styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body style="background: linear-gradient(to right, #87CEEB, #800080);">
+<body>
   <div class="container">
     <div class="left-panel">
       <div id="brain-container">
-        <!-- Brain representation will be rendered here -->
-        <img src="https://github.com/ermheld/Brain-Project/blob/main/Brain%20default.png" alt="Brain">
+        <img src="Brain_default.png" alt="Brain Representation">
       </div>
-    </div>
-    <div class="right-panel">
       <select id="pathway-select">
-        <option value="" disabled selected>Select Pathway</option>
-        <option value="default">Default</option>
+        <option value="default" selected>Select Pathway</option>
         <option value="reward">Reward Pathway</option>
         <option value="limbic">Limbic System</option>
         <option value="language">Language Pathways</option>
         <option value="vision">Vision Pathways</option>
-        <!-- Add more options as needed -->
       </select>
+    </div>
+    <div class="right-panel">
       <div id="anatomical-structures">
         <!-- Anatomical structures will be listed here -->
       </div>
     </div>
   </div>
-  <script src="https://github.com/ermheld/Brain-Project/raw/main/script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
