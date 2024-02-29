@@ -67,9 +67,3 @@ function updateAnatomicalStructures(pathway) {
     structuresList.appendChild(listItem);
   });
 }
-
-// Event listener for pathway select dropdown
-document.getElementById('pathway-select').addEventListener('change', function() {
-  var selectedPathway = this.value;
-  updateAnatomicalStructures(selectedPathway);
-});
