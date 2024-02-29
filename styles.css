@@ -122,3 +122,15 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+/* Initially hide the content of Lesions and Pharmacological Agents */
+.structure-lesions,
+.structure-pharmacological-agents {
+  display: none;
+}
+
+/* Show the content when their respective titles are clicked */
+.subsection-title.active + .structure-lesions,
+.subsection-title.active + .structure-pharmacological-agents {
+  display: block;
+}
