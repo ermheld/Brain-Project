@@ -352,9 +352,16 @@ function updateAnatomicalStructures(pathway) {
 }
 
 // Add an event listener to the dropdown menu
-document.getElementById("pathway-select").addEventListener("change", function() {
-    // Get the selected pathway
-    var selectedPathway = this.value;
-    // Call the function to update anatomical structures with the selected pathway
-    updateAnatomicalStructures(selectedPathway);
+document.addEventListener("DOMContentLoaded", function() {
+  // Add an event listener to the dropdown menu
+  var pathwayDropdown = document.getElementById("pathway-select");
+  if (pathwayDropdown) {
+    pathwayDropdown.addEventListener("change", function() {
+      // Get the selected pathway
+      var selectedPathway = this.value;
+      // Call the function to update anatomical structures with the selected pathway
+      updateAnatomicalStructures(selectedPathway);
+    });
+  }
 });
+
