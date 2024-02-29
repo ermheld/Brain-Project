@@ -55,4 +55,16 @@ function updateAnatomicalStructures(pathway) {
       structures = ["Select a pathway to view structures"];
   }
 
-  var structuresList
+  // Get the list element where the structures will be displayed
+  var structuresList = document.getElementById("anatomical-structures");
+  
+  // Clear previous contents
+  structuresList.innerHTML = "";
+
+  // Populate the list with the structures
+  structures.forEach(function(structure) {
+    var listItem = document.createElement("li");
+    listItem.textContent = structure;
+    structuresList.appendChild(listItem);
+  });
+}
