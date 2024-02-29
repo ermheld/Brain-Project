@@ -2,68 +2,67 @@
 function updateAnatomicalStructures(pathway) {
   var structures = [];
   var structuresList = document.getElementById("anatomical-structures");
+  var pathwayTitle = document.getElementById("pathway-title");
 
   // Clear previous contents
   structuresList.innerHTML = "";
 
-  // Logic to update the list of anatomical structures based on selected pathway
+  // Populate the list with the structures based on the selected pathway
   switch (pathway) {
     case "default":
       structures = [
-        "Frontal lobe - involved in executive functions, such as decision making and planning",
-        "Parietal lobe - processes sensory information from the body",
-        "Temporal lobe - responsible for processing auditory information and memory",
-        "Occipital lobe - primarily involved in visual processing",
-        "Thalamus - relays sensory information to the cerebral cortex",
-        "Hippocampus - crucial for memory formation",
-        "Amygdala - involved in emotion regulation and memory consolidation"
+        {
+          name: "Frontal Lobe",
+          description: "Involved in executive functions such as decision making and planning. Lesions may cause deficits in decision making and personality changes.",
+          pharmacologicalAgents: "Pharmacological agents targeting this area include selective serotonin reuptake inhibitors (SSRIs) for mood disorders.",
+        },
+        {
+          name: "Parietal Lobe",
+          description: "Processes sensory information from the body. Lesions may cause sensory deficits such as neglect syndrome or apraxia.",
+          pharmacologicalAgents: "No specific pharmacological agents target this area directly.",
+        },
         // Add more structures as needed
       ];
       break;
     case "reward":
       structures = [
-        "Nucleus accumbens - part of the reward pathway, involved in pleasure and reinforcement",
-        "Ventral tegmental area (VTA) - produces dopamine, a key neurotransmitter in the reward system",
-        "Prefrontal cortex - regulates decision making and impulse control",
-        "Basal ganglia - involved in motor control and reward-based learning"
+        {
+          name: "Nucleus Accumbens",
+          description: "Part of the reward pathway, involved in pleasure and reinforcement. Lesions or dysfunction may lead to anhedonia or addictive behaviors.",
+          pharmacologicalAgents: "Pharmacological agents targeting this area include dopamine agonists or antagonists for addiction treatment.",
+        },
+        {
+          name: "Ventral Tegmental Area (VTA)",
+          description: "Produces dopamine, a key neurotransmitter in the reward system. Dysfunction may lead to depression or addiction.",
+          pharmacologicalAgents: "Pharmacological agents targeting this area include dopamine reuptake inhibitors for depression.",
+        },
         // Add more structures as needed
       ];
       break;
-    case "limbic":
-      structures = [
-        "Cingulate gyrus - involved in emotion regulation and decision making",
-        "Hippocampus - crucial for memory formation",
-        "Amygdala - key in processing emotions, particularly fear and aggression",
-        "Fornix - connects the hippocampus to other brain regions involved in memory"
-        // Add more structures as needed
-      ];
-      break;
-    case "language":
-      structures = [
-        "Broca's area - responsible for speech production",
-        "Wernicke's area - involved in language comprehension",
-        "Arcuate fasciculus - connects Broca's and Wernicke's areas for language processing",
-        "Angular gyrus - contributes to language processing and number processing"
-        // Add more structures as needed
-      ];
-      break;
-    case "vision":
-      structures = [
-        "Primary visual cortex (V1) - processes visual information from the eyes",
-        "Optic nerve - transmits visual information from the retina to the brain",
-        "Lateral geniculate nucleus (LGN) - relays visual information to the occipital lobe",
-        "Superior colliculus - involved in visual attention and eye movements"
-        // Add more structures as needed
-      ];
-      break;
-    default:
-      structures = ["Select a pathway to view structures"];
+    // Add cases for other pathways
   }
+
+  // Set the pathway title
+  pathwayTitle.textContent = pathway.charAt(0).toUpperCase() + pathway.slice(1) + " Pathway";
 
   // Populate the list with the structures
   structures.forEach(function(structure) {
     var listItem = document.createElement("li");
-    listItem.textContent = structure;
+    var structureName = document.createElement("span");
+    var structureDescription = document.createElement("span");
+
+    structureName.textContent = structure.name;
+    structureName.style.fontWeight = "bold";
+    structureDescription.textContent = structure.description;
+
+    listItem.appendChild(structureName);
+    listItem.appendChild(document.createElement("br")); // Add line break for spacing
+    listItem.appendChild(structureDescription);
+    listItem.appendChild(document.createElement("br")); // Add line break for spacing
+    listItem.appendChild(document.createTextNode("Lesions: " + structure.lesions));
+    listItem.appendChild(document.createElement("br")); // Add line break for spacing
+    listItem.appendChild(document.createTextNode("Pharmacological Agents: " + structure.pharmacologicalAgents));
+
     structuresList.appendChild(listItem);
   });
 }
