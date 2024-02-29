@@ -59,8 +59,6 @@ function updateAnatomicalStructures(pathway) {
     listItem.appendChild(document.createElement("br")); // Add line break for spacing
     listItem.appendChild(structureDescription);
     listItem.appendChild(document.createElement("br")); // Add line break for spacing
-    listItem.appendChild(document.createTextNode("Lesions: " + structure.lesions));
-    listItem.appendChild(document.createElement("br")); // Add line break for spacing
     listItem.appendChild(document.createTextNode("Pharmacological Agents: " + structure.pharmacologicalAgents));
 
     structuresList.appendChild(listItem);
