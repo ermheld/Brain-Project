@@ -1,14 +1,16 @@
 // Function to update the list of anatomical structures
 function updateAnatomicalStructures(pathway) {
-  var structures = [];
   var structuresList = document.getElementById("anatomical-structures");
+  var pathwayTitle = document.getElementById("pathway-title");
 
   // Clear previous contents
   structuresList.innerHTML = "";
 
-  // Populate the list with the structures based on the selected pathway
+  // Define anatomical structures based on the selected pathway
+  var structures = [];
+
   switch (pathway) {
-    case "default":
+    case "reward":
       structures = [
         {
           name: "Frontal Lobe",
