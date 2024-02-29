@@ -318,6 +318,8 @@ function updateAnatomicalStructures(pathway) {
       ];
       break;
     default:
+            // Update pathway title for default case
+      pathwayTitle.textContent = "Select Pathway";
       structures = [{ name: "Select a pathway to view structures", description: "", lesions: "", pharmacologicalAgents: "" }];
   }
 
