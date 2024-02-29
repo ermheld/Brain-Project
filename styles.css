@@ -18,7 +18,7 @@ body {
 }
 
 .brain-image {
-  width: 100%; /* Ensure the image covers the left two-thirds of the screen */
+  width: 70%; /* Ensure the image covers the left two-thirds of the screen */
 }
 
 #pathway-select {
