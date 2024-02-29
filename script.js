@@ -106,6 +106,91 @@ function updateAnatomicalStructures(pathway) {
         // Add more structures as needed
       ];
       break;
+    case "mesocortical":
+      structures = [
+        {
+          name: "Prefrontal Cortex",
+          description: "Part of the mesocortical pathway, involved in cognitive control, decision making, and social behavior. Dysfunction may lead to deficits in executive functions and emotional regulation.",
+          lesions: "Lesions or dysfunction in the prefrontal cortex may result from traumatic brain injury, neurodevelopmental disorders, or neurodegenerative diseases.",
+          pharmacologicalAgents: "Pharmacological agents targeting this area include atypical antipsychotics for schizophrenia and antidepressants for mood disorders.",
+        },
+        {
+          name: "Anterior Cingulate Cortex",
+          description: "Involved in emotional processing, regulation, and cognitive functions such as attention and error detection. Dysfunction may lead to deficits in emotional regulation and attentional control.",
+          lesions: "Lesions or dysfunction in the anterior cingulate cortex may result from stroke, trauma, or neurodegenerative diseases.",
+          pharmacologicalAgents: "Pharmacological agents targeting this area include selective serotonin reuptake inhibitors (SSRIs) for depression and antiepileptic drugs for mood stabilization.",
+        },
+        // Add more structures as needed
+      ];
+      break;
+    case "mesostriatal":
+      structures = [
+        {
+          name: "Striatum",
+          description: "Part of the mesostriatal pathway, involved in reward processing, motor control, and habit formation. Dysfunction may lead to motor deficits and impaired reward learning.",
+          lesions: "Lesions or dysfunction in the striatum may result from stroke, neurodegenerative diseases, or exposure to neurotoxins.",
+          pharmacologicalAgents: "Pharmacological agents targeting this area include dopamine agonists for Parkinson's disease and antipsychotics for psychosis.",
+        },
+        {
+          name: "Substantia Nigra",
+          description: "Produces dopamine and is crucial for movement control. Dysfunction may lead to Parkinson's disease characterized by tremors, rigidity, and bradykinesia.",
+          lesions: "Lesions or dysfunction in the substantia nigra may result from neurodegenerative diseases, toxins, or vascular damage.",
+          pharmacologicalAgents: "Pharmacological agents targeting this area include levodopa for Parkinson's disease and monoamine oxidase inhibitors (MAOIs) for depression.",
+        },
+        // Add more structures as needed
+      ];
+      break;
+    case "tuberoinfundibular":
+      structures = [
+        {
+          name: "Hypothalamus",
+          description: "Part of the tuberoinfundibular pathway, involved in regulating hormone secretion, hunger, thirst, and body temperature. Dysfunction may lead to endocrine disorders and metabolic abnormalities.",
+          lesions: "Lesions or dysfunction in the hypothalamus may result from tumors, trauma, or neurodegenerative diseases.",
+          pharmacologicalAgents: "Pharmacological agents targeting this area include hormone replacement therapy for endocrine disorders and antipsychotics for psychosis.",
+        },
+        {
+          name: "Pituitary Gland",
+          description: "Produces and releases hormones that regulate various bodily functions, including growth, metabolism, and reproduction. Dysfunction may lead to hormonal imbalances and pituitary disorders.",
+          lesions: "Lesions or dysfunction in the pituitary gland may result from tumors, vascular abnormalities, or autoimmune diseases.",
+          pharmacologicalAgents: "Pharmacological agents targeting this area include hormone replacement therapy for hormone deficiencies and dopamine agonists for prolactinomas.",
+        },
+        // Add more structures as needed
+      ];
+      break;
+    case "mesolimbic":
+      structures = [
+        {
+          name: "Ventral Tegmental Area (VTA)",
+          description: "Part of the mesolimbic pathway, involved in reward processing, motivation, and reinforcement learning. Dysfunction may lead to addiction and mood disorders.",
+          lesions: "Lesions or dysfunction in the ventral tegmental area may result from chronic stress, drug abuse, or neurodegenerative diseases.",
+          pharmacologicalAgents: "Pharmacological agents targeting this area include dopamine agonists or antagonists for addiction treatment and antidepressants for mood disorders.",
+        },
+        {
+          name: "Nucleus Accumbens",
+          description: "Part of the mesolimbic pathway, involved in reward processing, pleasure, and reinforcement. Dysfunction may lead to addiction and mood disorders.",
+          lesions: "Lesions or dysfunction in the nucleus accumbens may result from chronic drug use, neurodegenerative diseases, or trauma.",
+          pharmacologicalAgents: "Pharmacological agents targeting this area include dopamine agonists or antagonists for addiction treatment and antidepressants for mood disorders.",
+        },
+        // Add more structures as needed
+      ];
+      break;
+    case "fear conditioning":
+      structures = [
+        {
+          name: "Amygdala",
+          description: "Key in fear conditioning, emotional processing, and memory consolidation. Dysfunction may lead to anxiety disorders and impaired fear learning.",
+          lesions: "Lesions or dysfunction in the amygdala may result from trauma, neurodevelopmental disorders, or neurodegenerative diseases.",
+          pharmacologicalAgents: "Pharmacological agents targeting this area include anxiolytics such as benzodiazepines for anxiety disorders and antidepressants for mood disorders.",
+        },
+        {
+          name: "Prefrontal Cortex",
+          description: "Involved in fear extinction and regulation of emotional responses. Dysfunction may lead to deficits in fear extinction and emotional dysregulation.",
+          lesions: "Lesions or dysfunction in the prefrontal cortex may result from trauma, neurodevelopmental disorders, or neurodegenerative diseases.",
+          pharmacologicalAgents: "Pharmacological agents targeting this area include atypical antipsychotics for psychosis and antidepressants for mood disorders.",
+        },
+        // Add more structures as needed
+      ];
+      break;
     default:
       structures = ["Select a pathway to view structures"];
   }
@@ -138,11 +223,3 @@ function updateAnatomicalStructures(pathway) {
     structuresList.appendChild(listItem);
   });
 }
-
-// Add an event listener to the dropdown menu
-document.getElementById("pathway-select").addEventListener("change", function() {
-    // Get the selected pathway
-    var selectedPathway = this.value;
-    // Call the function to update anatomical structures with the selected pathway
-    updateAnatomicalStructures(selectedPathway);
-});
