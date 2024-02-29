@@ -4,7 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Interactive Neuroanatomy Platform</title>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background: linear-gradient(to bottom right, #87CEFA, #FF00FF, #800080);
+    }
+
+    .container {
+      display: flex;
+    }
+
+    .left-panel {
+      flex: 2;
+      padding: 20px;
+    }
+
+    .right-panel {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .brain-image {
+      width: 70%; /* Ensure the image covers the left two-thirds of the screen */
+    }
+
+    #pathway-select {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+
+    #pathway-title {
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    #anatomical-structures {
+      font-size: 20px;
+      list-style-type: none;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -20,7 +60,7 @@
         <option value="mesostriatal">Mesostriatal Pathway</option>
         <option value="tuberoinfundibular">Tuberoinfundibular Pathway</option>
         <option value="mesolimbic">Mesolimbic Pathway</option>
-        <option value="fear-conditioning">Fear Conditioning Pathway</option>
+        <option value="fear conditioning">Fear Conditioning Pathway</option>
       </select>
     </div>
     <div class="right-panel">
@@ -30,6 +70,84 @@
       </div>
     </div>
   </div>
-  <script src="script.js"></script>
+  <script>
+    // Function to update the list of anatomical structures
+    function updateAnatomicalStructures(pathway) {
+      var structures = [];
+      var structuresList = document.getElementById("anatomical-structures");
+      var pathwayTitle = document.getElementById("pathway-title");
+
+      // Clear previous contents
+      structuresList.innerHTML = "";
+
+      // Populate the list with the structures based on the selected pathway
+      switch (pathway) {
+        case "default":
+          structures = [
+            {
+              name: "Frontal Lobe",
+              description: "Involved in executive functions such as decision making, planning, and social behavior. Lesions may cause deficits in executive functions, personality changes, and impaired social behavior.",
+              lesions: "Lesions in the frontal lobe may result from traumatic brain injury, stroke, or neurodegenerative diseases such as frontotemporal dementia.",
+              pharmacologicalAgents: "Pharmacological agents targeting this area include selective serotonin reuptake inhibitors (SSRIs) for mood disorders and stimulants for attention deficit hyperactivity disorder (ADHD).",
+            },
+            // Add more structures as needed
+          ];
+          break;
+        case "reward":
+          structures = [
+            {
+              name: "Nucleus Accumbens",
+              description: "Part of the reward pathway, involved in pleasure, reinforcement, and motivation. Lesions or dysfunction may lead to anhedonia, addiction, or depression.",
+              lesions: "Lesions in the nucleus accumbens may result from chronic drug use, neurodegenerative diseases, or trauma.",
+              pharmacologicalAgents: "Pharmacological agents targeting this area include dopamine agonists or antagonists for addiction treatment and antidepressants for mood disorders.",
+            },
+            // Add more structures as needed
+          ];
+          break;
+        // Add cases for other pathways
+        default:
+          structures = ["Select a pathway to view structures"];
+      }
+
+      // Set the pathway title
+      pathwayTitle.textContent = pathway.charAt(0).toUpperCase() + pathway.slice(1) + " Pathway";
+
+      // Populate the list with the structures
+      structures.forEach(function(structure) {
+        var listItem = document.createElement("li");
+        var structureName = document.createElement("span");
+        var structureDescription = document.createElement("span");
+        var structureLesions = document.createElement("span");
+        var structurePharmacologicalAgents = document.createElement("span");
+
+        structureName.textContent = structure.name;
+        structureName.style.fontWeight = "bold";
+        structureDescription.textContent = structure.description;
+        structureLesions.textContent = "Lesions: " + structure.lesions;
+        structurePharmacologicalAgents.textContent = "Pharmacological Agents: " + structure.pharmacologicalAgents;
+
+        listItem.appendChild(structureName);
+        listItem.appendChild(document.createElement("br")); // Add line break for spacing
+        listItem.appendChild(structureDescription);
+        listItem.appendChild(document.createElement("br")); // Add line break for spacing
+        listItem.appendChild(structureLesions);
+        listItem.appendChild(document.createElement("br")); // Add line break for spacing
+        listItem.appendChild(structurePharmacologicalAgents);
+
+        structuresList.appendChild(listItem);
+      });
+    }
+
+    // Add an event listener to the dropdown menu
+    document.getElementById("pathway-select").addEventListener("change", function() {
+        // Get the selected pathway
+        var selectedPathway = this.value;
+        // Call the function to update anatomical structures with the selected pathway
+        updateAnatomicalStructures(selectedPathway);
+    });
+
+    // Call the function initially with the default pathway
+    updateAnatomicalStructures("default");
+  </script>
 </body>
 </html>
