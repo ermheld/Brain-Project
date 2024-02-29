@@ -362,23 +362,23 @@ document.addEventListener("DOMContentLoaded", function() {
     pathwayDropdown.addEventListener("change", function() {
         var selectedPathway = pathwayDropdown.value;
         updateAnatomicalStructures(selectedPathway);
+    });
 
-        // Add event listeners to toggle lesions and pharmacological agents for all structures
-        var structures = document.querySelectorAll(".structure-details");
+    // Add event listeners to toggle lesions and pharmacological agents for all structures
+    var structures = document.querySelectorAll(".structure-details");
 
-        structures.forEach(function(structure) {
-            var lesionsTitle = structure.querySelector(".subsection-title");
-            var lesionsContent = structure.querySelector(".structure-lesions");
-            var pharmacologicalTitle = structure.querySelector(".subsection-title");
-            var pharmacologicalContent = structure.querySelector(".structure-pharmacological-agents");
+    structures.forEach(function(structure) {
+        var lesionsTitle = structure.querySelector(".lesions-toggle");
+        var lesionsContent = structure.querySelector(".structure-lesions");
+        var pharmacologicalTitle = structure.querySelector(".pharmacological-toggle");
+        var pharmacologicalContent = structure.querySelector(".structure-pharmacological-agents");
 
-            lesionsTitle.addEventListener("click", function() {
-                lesionsContent.classList.toggle("show");
-            });
+        lesionsTitle.addEventListener("click", function() {
+            lesionsContent.classList.toggle("show");
+        });
 
-            pharmacologicalTitle.addEventListener("click", function() {
-                pharmacologicalContent.classList.toggle("show");
-            });
+        pharmacologicalTitle.addEventListener("click", function() {
+            pharmacologicalContent.classList.toggle("show");
         });
     });
 });
