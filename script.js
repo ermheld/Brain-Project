@@ -369,4 +369,19 @@ document.addEventListener("DOMContentLoaded", function() {
         // Call the updateAnatomicalStructures function with the selected pathway
         updateAnatomicalStructures(selectedPathway);
     });
+
+    // Toggle switch for Lesions
+    var toggleLesions = document.getElementById("toggle-lesions");
+    var lesionsContent = document.getElementById("structure-lesions");
+    toggleLesions.addEventListener("change", function() {
+        lesionsContent.style.display = toggleLesions.checked ? "block" : "none";
+    });
+
+    // Toggle switch for Pharmacological Agents
+    var togglePharmacologicalAgents = document.getElementById("toggle-pharmacological-agents");
+    var pharmacologicalAgentsContent = document.getElementById("structure-pharmacological-agents");
+    togglePharmacologicalAgents.addEventListener("change", function() {
+        pharmacologicalAgentsContent.style.display = togglePharmacologicalAgents.checked ? "block" : "none";
+    });
 });
+
