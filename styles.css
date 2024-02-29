@@ -1,7 +1,6 @@
 body {
-  margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: linear-gradient(to bottom right, #78aaff, #ff77a9);
+  background: linear-gradient(to bottom right, #87CEFA, #FF00FF, #800080);
 }
 
 .container {
@@ -10,30 +9,31 @@ body {
 }
 
 .left-panel {
-  flex: 1;
-  padding: 20px;
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .right-panel {
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   padding: 20px;
 }
 
-#pathway-select {
-  width: 200px;
-  margin-bottom: 20px;
-}
-
-#brain-container {
-  /* Styling for brain representation */
-}
-
 #brain-container img {
-  width: 60%; /* Make the image 40% smaller */
-  display: block;
-  margin: 0 auto; /* Center the image horizontally */
+  width: 60%; /* Adjust as needed */
+}
+
+#pathway-select {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
 }
 
 #anatomical-structures {
-  /* Styling for anatomical structures list */
+  font-size: 16px;
 }
