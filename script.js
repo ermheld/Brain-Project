@@ -357,7 +357,12 @@ document.addEventListener("DOMContentLoaded", function() {
     var pathwayDropdown = document.getElementById("pathway-select");
     console.log(pathwayDropdown); 
 
+    // Add change event listener to the dropdown menu
     pathwayDropdown.addEventListener("change", function() {
-        // Your event listener code here
+        // Retrieve the selected pathway
+        var selectedPathway = pathwayDropdown.value;
+        
+        // Call the updateAnatomicalStructures function with the selected pathway
+        updateAnatomicalStructures(selectedPathway);
     });
 });
