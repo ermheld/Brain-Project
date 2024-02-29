@@ -1,8 +1,3 @@
-// Function to add a layer representing the selected pathway
-function addPathwayLayer(pathway) {
-  // Logic to add pathway layer to the brain representation
-}
-
 // Function to update the list of anatomical structures
 function updateAnatomicalStructures(pathway) {
   var structures = [];
@@ -60,23 +55,4 @@ function updateAnatomicalStructures(pathway) {
       structures = ["Select a pathway to view structures"];
   }
 
-  // Get the anatomical structures list element
-  var structuresList = document.getElementById("anatomical-structures");
-
-  // Clear the previous content of the structures list
-  structuresList.innerHTML = "";
-
-  // Create list items for each structure and add them to the list
-  structures.forEach(function(structure) {
-    var listItem = document.createElement("li");
-    listItem.textContent = structure;
-    structuresList.appendChild(listItem);
-  });
-}
-
-// Event listener for pathway select dropdown
-document.getElementById('pathway-select').addEventListener('change', function() {
-  var selectedPathway = this.value;
-  addPathwayLayer(selectedPathway);
-  updateAnatomicalStructures(selectedPathway);
-});
+  var structuresList
