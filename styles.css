@@ -1,17 +1,16 @@
+/* Global styles */
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: linear-gradient(to bottom right, #87CEFA, #FF00FF, #800080);
-  background-repeat: no-repeat; /* Prevent background from repeating */
   margin: 0;
   padding: 0;
 }
-
 
 .container {
   display: flex;
   flex-wrap: wrap;
 }
 
+/* Dropdown panel styles */
 .dropdown-panel {
   flex-basis: 100%;
   text-align: center;
@@ -19,51 +18,44 @@ body {
 }
 
 #pathway-select {
-  font-size: 20px;
+  font-size: 16px; /* Adjust font size for mobile */
   padding: 10px;
   border-radius: 8px;
   border: 2px solid #333;
   background-color: #fff;
   color: #333;
   font-weight: bold;
+  width: 80%; /* Adjust width for mobile */
+  max-width: 300px; /* Limit maximum width for larger screens */
+  margin: 0 auto; /* Center the dropdown */
 }
 
+/* Left panel styles */
 .left-panel {
   flex: 1;
   padding: 20px;
 }
 
+.brain-image {
+  max-width: 100%; /* Make sure image doesn't exceed container width */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Right panel styles */
 .right-panel {
   flex: 2;
   padding: 20px;
-  position: relative; /* Position relative for the translucent-creme-colored panel */
 }
 
 #anatomical-structures {
-  background-color: rgba(255, 240, 225, 0.8); /* Translucent-creme-colored panel */
+  background-color: rgba(255, 240, 225, 0.8);
   padding: 20px;
   border-radius: 10px;
 }
 
-#anatomical-structures h3 {
-  font-weight: bold;
-  margin-top: 0;
-}
-
-#anatomical-structures .subsection {
-  margin-bottom: 10px;
-}
-
-#anatomical-structures .subsection-title {
-  font-weight: bold;
-  cursor: pointer;
-}
-
-#anatomical-structures .subsection-content {
-  display: none;
-  margin-left: 20px;
-}
-
-#anatomical-structures .subsection-content.show {
-  display: block;
+/* Media query for smaller screens (e.g., mobile devices) */
+@media screen and (max-width: 768px) {
+  #pathway-select {
+    font-size: 14px; /* Further reduce font size for smaller screens */
+  }
 }
