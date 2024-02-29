@@ -357,31 +357,28 @@ function updateAnatomicalStructures(pathway) {
 
 // Add an event listener to the dropdown menu
 document.addEventListener("DOMContentLoaded", function() {
-    // Log pathwayDropdown variable
     var pathwayDropdown = document.getElementById("pathway-select");
-    console.log(pathwayDropdown); 
 
-    // Add change event listener to the dropdown menu
     pathwayDropdown.addEventListener("change", function() {
-        // Retrieve the selected pathway
         var selectedPathway = pathwayDropdown.value;
-        
-        // Call the updateAnatomicalStructures function with the selected pathway
         updateAnatomicalStructures(selectedPathway);
-    });
 
-    // Toggle switch for Lesions
-    var toggleLesions = document.getElementById("toggle-lesions");
-    var lesionsContent = document.getElementById("structure-lesions");
-    toggleLesions.addEventListener("change", function() {
-        lesionsContent.style.display = toggleLesions.checked ? "block" : "none";
-    });
+        // Add event listeners to toggle lesions and pharmacological agents for all structures
+        var structures = document.querySelectorAll(".structure-details");
 
-    // Toggle switch for Pharmacological Agents
-    var togglePharmacologicalAgents = document.getElementById("toggle-pharmacological-agents");
-    var pharmacologicalAgentsContent = document.getElementById("structure-pharmacological-agents");
-    togglePharmacologicalAgents.addEventListener("change", function() {
-        pharmacologicalAgentsContent.style.display = togglePharmacologicalAgents.checked ? "block" : "none";
+        structures.forEach(function(structure) {
+            var lesionsTitle = structure.querySelector(".subsection-title");
+            var lesionsContent = structure.querySelector(".structure-lesions");
+            var pharmacologicalTitle = structure.querySelector(".subsection-title");
+            var pharmacologicalContent = structure.querySelector(".structure-pharmacological-agents");
+
+            lesionsTitle.addEventListener("click", function() {
+                lesionsContent.classList.toggle("show");
+            });
+
+            pharmacologicalTitle.addEventListener("click", function() {
+                pharmacologicalContent.classList.toggle("show");
+            });
+        });
     });
 });
-
