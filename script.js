@@ -55,9 +55,8 @@ function updateAnatomicalStructures(pathway) {
       structures = ["Select a pathway to view structures"];
   }
 
-  // Get the list element where the structures will be displayed
   var structuresList = document.getElementById("anatomical-structures");
-  
+
   // Clear previous contents
   structuresList.innerHTML = "";
 
