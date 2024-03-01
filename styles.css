@@ -168,16 +168,6 @@ input:checked + .slider:before {
   font-family: "Georgia, serif";
 }
 
-.structure h3::before, .subsection-title::before {
-  content: '+';
-  margin-right: 8px;
-  color: #000; /* Icon color */
-  transition: transform 0.2s ease; /* Smooth transform transition */
-}
-
-.structure h3.expanded::before, .subsection-title.expanded::before {
-  content: '-';
-}
 
 .structure-description, .structure-lesions, .structure-pharmacological-agents {
   padding-left: 20px; /* Indent content for visual hierarchy */
