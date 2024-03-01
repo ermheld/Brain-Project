@@ -152,3 +152,34 @@ input:checked + .slider:before {
   color: #551A8B; /* Darker shade for visual feedback */
 }
 
+.structure h3, .subsection-title {
+  cursor: pointer;
+  color: #0000EE; /* Traditional link color */
+  display: flex;
+  align-items: center;
+}
+
+.structure h3:hover, .subsection-title:hover {
+  text-decoration: underline;
+  color: #551A8B; /* Darker shade for visual feedback */
+}
+
+.structure h3 {
+  font-size: 20px; /* Larger font size */
+  font-weight: bold; /* Bolder font */
+}
+
+.structure h3::before, .subsection-title::before {
+  content: '+';
+  margin-right: 8px;
+  color: #000; /* Icon color */
+  transition: transform 0.2s ease; /* Smooth transform transition */
+}
+
+.structure h3.expanded::before, .subsection-title.expanded::before {
+  content: '-';
+}
+
+.structure-description, .structure-lesions, .structure-pharmacological-agents {
+  padding-left: 20px; /* Indent content for visual hierarchy */
+}
