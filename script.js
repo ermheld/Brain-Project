@@ -386,3 +386,33 @@ document.addEventListener("DOMContentLoaded", function() {
         updateAnatomicalStructures(selectedPathway);
     });
 });
+initialize3DModel(); // Call the function to initialize and load the 3D model
+});
+
+function initialize3DModel() {
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(document.getElementById('brainModelContainer').clientWidth, document.getElementById('brainModelContainer').clientHeight);
+    document.getElementById('brainModelContainer').appendChild(renderer.domElement);
+
+    var ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
+    scene.add(ambientLight);
+    var directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    directionalLight.position.set(1, 1, 0).normalize();
+    scene.add(directionalLight);
+
+    var loader = new THREE.GLTFLoader();
+    loader.load('Brain.glb', function(gltf) {
+        scene.add(gltf.scene);
+        camera.position.z = 5; // Adjust based on the size of your model
+    }, undefined, function(error) {
+        console.error(error);
+    });
+
+    function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+    }
+    animate();
+}
