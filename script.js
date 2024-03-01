@@ -369,18 +369,17 @@ document.addEventListener("DOMContentLoaded", function() {
             content.classList.remove("show");
         });
 
-        // Show only structure names for Brodmann Areas
-        if (selectedPathway === "brodmann_areas") {
-            var structureDetails = document.querySelectorAll(".structure-details");
-            structureDetails.forEach(function(structure) {
-                var structureName = structure.querySelector("h4.subsection-title");
-                var structureContent = structure.querySelector(".subsection-content");
+        // Show only structure names for the selected pathway
+        var structureDetails = document.querySelectorAll(".structure-details");
+        structureDetails.forEach(function(structure) {
+            var structureName = structure.querySelector("h4.subsection-title");
+            var structureContent = structure.querySelector(".subsection-content");
 
-                // Hide content for Brodmann Areas
-                if (structureName.textContent !== "Brodmann Areas") {
-                    structureContent.classList.remove("show");
-                }
-            });
-        }
+            // Hide content for structures not belonging to the selected pathway
+            if (structureName.textContent.trim() !== selectedPathway) {
+                structureContent.classList.remove("show");
+            }
+        });
     });
 });
+
