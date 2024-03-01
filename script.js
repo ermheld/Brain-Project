@@ -383,44 +383,46 @@ function updateAnatomicalStructures(pathway) {
     structures.forEach(function(structure) {
         var listItem = document.createElement("div");
         listItem.classList.add("structure");
-        listItem.addEventListener('click', function() {
-            // Toggle visibility of lesions and pharmacological agents for this structure
-            this.querySelectorAll(".structure-lesions, .structure-pharmacological-agents").forEach(function(detail) {
-                detail.style.display = detail.style.display === "block" ? "none" : "block";
-            });
-        });
 
         var structureName = document.createElement("h3");
         structureName.textContent = structure.name;
+        structureName.style.cursor = "pointer";
         listItem.appendChild(structureName);
+
+        var detailsDiv = document.createElement("div");
+        detailsDiv.style.display = "none"; // Initially hidden
 
         var structureDescription = document.createElement("p");
         structureDescription.textContent = structure.description;
-        listItem.appendChild(structureDescription);
+        detailsDiv.appendChild(structureDescription);
 
         var lesionsTitle = document.createElement("h4");
         lesionsTitle.classList.add("subsection-title");
         lesionsTitle.textContent = "Lesions";
-        listItem.appendChild(lesionsTitle);
+        detailsDiv.appendChild(lesionsTitle);
 
         var lesionsContent = document.createElement("p");
         lesionsContent.classList.add("structure-lesions");
         lesionsContent.textContent = structure.lesions;
-        lesionsContent.style.display = "none"; // Initially hidden
-        listItem.appendChild(lesionsContent);
+        detailsDiv.appendChild(lesionsContent);
 
         var pharmacologicalAgentsTitle = document.createElement("h4");
         pharmacologicalAgentsTitle.classList.add("subsection-title");
         pharmacologicalAgentsTitle.textContent = "Pharmacological Agents";
-        listItem.appendChild(pharmacologicalAgentsTitle);
+        detailsDiv.appendChild(pharmacologicalAgentsTitle);
 
         var pharmacologicalAgentsContent = document.createElement("p");
         pharmacologicalAgentsContent.classList.add("structure-pharmacological-agents");
         pharmacologicalAgentsContent.textContent = structure.pharmacologicalAgents;
-        pharmacologicalAgentsContent.style.display = "none"; // Initially hidden
-        listItem.appendChild(pharmacologicalAgentsContent);
+        detailsDiv.appendChild(pharmacologicalAgentsContent);
 
+        listItem.appendChild(detailsDiv);
         structuresList.appendChild(listItem);
+
+        structureName.addEventListener('click', function() {
+            // Toggle visibility of the details div
+            detailsDiv.style.display = detailsDiv.style.display === "none" ? "block" : "none";
+        });
     });
 }
 
