@@ -142,3 +142,13 @@ input:checked + .slider:before {
 .subsection-title.active + .structure-pharmacological-agents {
   display: block;
 }
+.structure h3, .subsection-title {
+  cursor: pointer;
+  color: #0000EE; /* Traditional link color */
+}
+
+.structure h3:hover, .subsection-title:hover {
+  text-decoration: underline;
+  color: #551A8B; /* Darker shade for visual feedback */
+}
+
