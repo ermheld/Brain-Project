@@ -382,6 +382,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+// Function to update the list of anatomical structures
 function updateAnatomicalStructures(pathway) {
     var structuresList = document.getElementById("anatomical-structures");
     structuresList.innerHTML = ""; // Clear previous contents
@@ -393,7 +394,7 @@ function updateAnatomicalStructures(pathway) {
         listItem.classList.add("structure");
 
         var structureName = document.createElement("h3");
-        structureName.textContent = structure.name;
+        structureName.innerHTML = `<span class="expand-collapse-icon">+</span> ${structure.name}`;
         structureName.style.cursor = "pointer";
         listItem.appendChild(structureName);
 
@@ -404,9 +405,10 @@ function updateAnatomicalStructures(pathway) {
         structureDescription.textContent = structure.description;
         detailsDiv.appendChild(structureDescription);
 
+        // Lesions
         var lesionsTitle = document.createElement("h4");
         lesionsTitle.classList.add("subsection-title");
-        lesionsTitle.textContent = "Lesions";
+        lesionsTitle.innerHTML = `<span class="expand-collapse-icon">+</span> Lesions`;
         lesionsTitle.style.cursor = "pointer";
         detailsDiv.appendChild(lesionsTitle);
 
@@ -416,9 +418,10 @@ function updateAnatomicalStructures(pathway) {
         lesionsContent.style.display = "none"; // Initially hidden
         detailsDiv.appendChild(lesionsContent);
 
+        // Pharmacological Agents
         var pharmacologicalAgentsTitle = document.createElement("h4");
         pharmacologicalAgentsTitle.classList.add("subsection-title");
-        pharmacologicalAgentsTitle.textContent = "Pharmacological Agents";
+        pharmacologicalAgentsTitle.innerHTML = `<span class="expand-collapse-icon">+</span> Pharmacological Agents`;
         pharmacologicalAgentsTitle.style.cursor = "pointer";
         detailsDiv.appendChild(pharmacologicalAgentsTitle);
 
@@ -432,26 +435,26 @@ function updateAnatomicalStructures(pathway) {
         structuresList.appendChild(listItem);
 
         structureName.addEventListener('click', function() {
-            // Toggle visibility of the details div, but do not hide the subsection titles
-            detailsDiv.style.display = detailsDiv.style.display === "none" ? "block" : "none";
+            var isExpanded = detailsDiv.style.display === "block";
+            detailsDiv.style.display = isExpanded ? "none" : "block";
+            this.querySelector(".expand-collapse-icon").textContent = isExpanded ? "+" : "-";
         });
 
         lesionsTitle.addEventListener('click', function(event) {
-            // Prevent the structureName click event from firing when a title is clicked
-            event.stopPropagation();
-            // Toggle the visibility of the lesions content
-            lesionsContent.style.display = lesionsContent.style.display === "none" ? "block" : "none";
+            event.stopPropagation(); // Prevent structureName click event
+            var isExpanded = lesionsContent.style.display === "block";
+            lesionsContent.style.display = isExpanded ? "none" : "block";
+            this.querySelector(".expand-collapse-icon").textContent = isExpanded ? "+" : "-";
         });
 
         pharmacologicalAgentsTitle.addEventListener('click', function(event) {
-            // Prevent the structureName click event from firing when a title is clicked
-            event.stopPropagation();
-            // Toggle the visibility of the pharmacological agents content
-            pharmacologicalAgentsContent.style.display = pharmacologicalAgentsContent.style.display === "none" ? "block" : "none";
+            event.stopPropagation(); // Prevent structureName click event
+            var isExpanded = pharmacologicalAgentsContent.style.display === "block";
+            pharmacologicalAgentsContent.style.display = isExpanded ? "none" : "block";
+            this.querySelector(".expand-collapse-icon").textContent = isExpanded ? "+" : "-";
         });
     });
 }
-
 
 function getStructuresForPathway(pathway) {
     var structures = [];
@@ -769,3 +772,10 @@ case "default":
     }
     return structures;
 }
+document.addEventListener("DOMContentLoaded", function() {
+    var pathwayDropdown = document.getElementById("pathway-select");
+    pathwayDropdown.addEventListener("change", function() {
+        var selectedPathway = pathwayDropdown.value;
+        updateAnatomicalStructures(selectedPathway);
+    });
+});
