@@ -148,7 +148,6 @@ input:checked + .slider:before {
 }
 
 .structure h3:hover, .subsection-title:hover {
-  text-decoration: underline;
   color: #551A8B; /* Darker shade for visual feedback */
 }
 
@@ -160,13 +159,13 @@ input:checked + .slider:before {
 }
 
 .structure h3:hover, .subsection-title:hover {
-  text-decoration: underline;
   color: #551A8B; /* Darker shade for visual feedback */
 }
 
 .structure h3 {
   font-size: 20px; /* Larger font size */
   font-weight: bold; /* Bolder font */
+  font-family: "Georgia, serif";
 }
 
 .structure h3::before, .subsection-title::before {
@@ -182,4 +181,7 @@ input:checked + .slider:before {
 
 .structure-description, .structure-lesions, .structure-pharmacological-agents {
   padding-left: 20px; /* Indent content for visual hierarchy */
+}
+.structure p, .structure h4 {
+    font-family: "Helvetica Neue, Helvetica, Arial, sans-serif";
 }
