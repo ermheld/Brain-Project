@@ -362,23 +362,25 @@ document.addEventListener("DOMContentLoaded", function() {
     pathwayDropdown.addEventListener("change", function() {
         var selectedPathway = pathwayDropdown.value;
         updateAnatomicalStructures(selectedPathway);
-    });
 
-    // Add event listeners to toggle lesions and pharmacological agents for all structures
-    var structures = document.querySelectorAll(".structure-details");
-
-    structures.forEach(function(structure) {
-        var lesionsTitle = structure.querySelector(".lesions-toggle");
-        var lesionsContent = structure.querySelector(".structure-lesions");
-        var pharmacologicalTitle = structure.querySelector(".pharmacological-toggle");
-        var pharmacologicalContent = structure.querySelector(".structure-pharmacological-agents");
-
-        lesionsTitle.addEventListener("click", function() {
-            lesionsContent.classList.toggle("show");
+        // Hide all subsection contents initially
+        var subsectionContents = document.querySelectorAll(".subsection-content");
+        subsectionContents.forEach(function(content) {
+            content.classList.remove("show");
         });
 
-        pharmacologicalTitle.addEventListener("click", function() {
-            pharmacologicalContent.classList.toggle("show");
-        });
+        // Show only structure names for Brodmann Areas
+        if (selectedPathway === "brodmann_areas") {
+            var structureDetails = document.querySelectorAll(".structure-details");
+            structureDetails.forEach(function(structure) {
+                var structureName = structure.querySelector("h4.subsection-title");
+                var structureContent = structure.querySelector(".subsection-content");
+
+                // Hide content for Brodmann Areas
+                if (structureName.textContent !== "Brodmann Areas") {
+                    structureContent.classList.remove("show");
+                }
+            });
+        }
     });
 });
