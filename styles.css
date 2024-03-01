@@ -144,22 +144,22 @@ input:checked + .slider:before {
 }
 .structure h3, .subsection-title {
   cursor: pointer;
-  color: #0000EE; /* Traditional link color */
+  color: #000000; /* Traditional link color */
 }
 
 .structure h3:hover, .subsection-title:hover {
-  color: #551A8B; /* Darker shade for visual feedback */
+  color: #444444; /* Darker shade for visual feedback */
 }
 
 .structure h3, .subsection-title {
   cursor: pointer;
-  color: #0000EE; /* Traditional link color */
+  color: #000000; /* Traditional link color */
   display: flex;
   align-items: center;
 }
 
 .structure h3:hover, .subsection-title:hover {
-  color: #551A8B; /* Darker shade for visual feedback */
+  color: #444444; /* Darker shade for visual feedback */
 }
 
 .structure h3 {
