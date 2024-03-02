@@ -393,38 +393,60 @@ document.addEventListener("DOMContentLoaded", function() {
 function initialize3DModel() {
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    var renderer = new THREE.WebGLRenderer();
-    var container = document.getElementById('brainModelContainer');
 
-    renderer.setSize(container.clientWidth, container.clientHeight);
+    // Adjust renderer size to match the container or desired size
+    var container = document.getElementById('brainModelContainer');
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(container.clientWidth, container.clientHeight); // Use container's dimensions
     container.appendChild(renderer.domElement);
 
+    // Lighting adjustments
     var ambientLight = new THREE.AmbientLight(0xcccccc, 0.5);
     scene.add(ambientLight);
-
-    var directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    directionalLight.position.set(0, 1, 1);
+    var directionalLight = new THREE.DirectionalLight(0xffffff, 0.8); // Adjust intensity as needed
+    directionalLight.position.set(0, 1, 1); // Adjust direction as needed
     scene.add(directionalLight);
 
-    camera.position.set(20, 20, 20);
-    camera.fov = 45;
-    camera.updateProjectionMatrix();
+    var model; // To store the loaded model
 
+    // Load the model
     var loader = new THREE.GLTFLoader();
     loader.load('Brain.glb', function(gltf) {
+        model = gltf; // Store the model globally
         scene.add(gltf.scene);
-        gltf.scene.scale.set(20, 20, 20);
-        gltf.scene.position.set(0, 0, 0);
-    }, undefined, function(error) {
-        console.error(error);
+
+        // Scale the model
+        gltf.scene.scale.set(20, 20, 20); // Adjust this value as needed
+
+        // Adjust the camera to focus on the model
+        camera.position.z = 20; // Adjust based on the size and position of your model
+        camera.position.y = 20;
+        camera.position.x = 20;
+        camera.fov = 45; // Adjust the field of view as needed
+        camera.updateProjectionMatrix();
+
+        // Optionally, adjust the model's position if it's not centered
+        gltf.scene.position.set(0, 0, 0); // Adjust as needed
+
+        // Enable Orbit controls
+        var controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.25;
+        controls.screenSpacePanning = false;
+        controls.maxPolarAngle = Math.PI / 2;
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update(); // required if controls.enableDamping or controls.autoRotate are set to true
+            renderer.render(scene, camera);
+        }
+
+        animate();
     });
 
-    // OrbitControls need to be included after the three.js and OrbitControls.js scripts
-    var controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.25;
-    controls.screenSpacePanning = false;
-    controls.maxPolarAngle = Math.PI / 2;
+    // Resize handling
+    window.addEventListener('resize', onWindowResize, false);
 
     function onWindowResize() {
         camera.aspect = container.clientWidth / container.clientHeight;
@@ -432,13 +454,208 @@ function initialize3DModel() {
         renderer.setSize(container.clientWidth, container.clientHeight);
     }
 
-    window.addEventListener('resize', onWindowResize, false);
-
-    function animate() {
-        requestAnimationFrame(animate);
-        controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
-        renderer.render(scene, camera);
+    // Function to toggle the visibility of a model part
+    function toggleModelPartVisibility(partName, isVisible) {
+        model.scene.traverse(function (child) {
+            if (child.isMesh && child.name === partName) {
+                child.visible = isVisible;
+            }
+        });
     }
 
-    animate();
+    // List of parts
+    var parts = [
+    "Angular gyrus.r.001",
+    "Angular gyrus.r.002",
+    "Cuneus.r.001",
+    "Cuneus.r.002",
+    "Inferior frontal sulcus.r.001",
+    "Inferior frontal sulcus.r.002",
+    "Inferior temporal gyrus.r.001",
+    "Inferior temporal gyrus.r.002",
+    "Middle frontal gyrus.r.001",
+    "Middle frontal gyrus.r.002",
+    "Middle temporal gyrus.r.001",
+    "Middle temporal gyrus.r.002",
+    "Occipital pole.r.001",
+    "Occipital pole.r.002",
+    "Orbital gyri.r.001",
+    "Orbital gyri.r.002",
+    "Postcentral gyrus.r.001",
+    "Postcentral gyrus.r.002",
+    "Precentral gyrus.r.001",
+    "Precentral gyrus.r.002",
+    "Precuneus.r.001Precuneus.r.002",
+    "Superior frontal gyrus.r.001",
+    "Superior frontal gyrus.r.002",
+    "Superior occipital gyri.r.001",
+    "Superior occipital gyri.r.002",
+    "Superior parietal lobule.r.001",
+    "Superior parietal lobule.r.002",
+    "Supramarginal gyrus.r.001",
+    "Supramarginal gyrus.r.002",
+    "Temporal pole.r.001",
+    "Temporal pole.r.002",
+    "Inferior occipital gyrus and sulcus*.r.001",
+    "Inferior occipital gyrus and sulcus*.r.002",
+    "Insula (Subcentral gyrus and ant. and post. sulci*).r.001",
+    "Insula (Subcentral gyrus and ant. and post. sulci*).r.002",
+    "Lateral occipital gyrus (Middle occipital gyrus*).r.001",
+    "Lateral occipital gyrus (Middle occipital gyrus*).r.002",
+    "Lingual gyrus.r.001",
+    "Lingual gyrus.r.002",
+    "Opercular part of inferior frontal gyrus.1.001",
+    "Opercular part of inferior frontal gyrus.1.002",
+    "Orbital gyri (Frontomarginal gyrus and sulcus*).r.001",
+    "Orbital gyri (Frontomarginal gyrus and sulcus*).r.002",
+    "Orbital part of inferior frontal gyrus.l.002",
+    "Orbital sulci (H-shaped orbital sulci*).r.001",
+    "Orbital sulci (H-shaped orbital sulci*).r.002",
+    "Orbital sulci (Lateral Orbital sulcus*).r.001",
+    "Paracentral gyrus and sulcus*.r.001",
+    "Paracentral gyrus and sulcus*.r.002",
+    "Straight gyrus (Gyrus rectus).r.001",
+    "Straight gyrus (Gyrus rectus).r.002",
+    "Superior temporal gyrus (Lateral part).r.001",
+    "Superior temporal gyrus (Lateral part).r.002",
+    "Temporal plane.r.001",
+    "Temporal plane.r.002",
+    "Transverse frontopolar gyrus and sulcus*.r.001",
+    "Transverse frontopolar gyrus and sulcus*.r.002",
+    "Triangular part of inferior frontal gyrus*.r001",
+    "Triangular part of inferior frontal gyrus*.r002",
+    "Anterior occipital sulcus*.r.001",
+    "Anterior occipital sulcus*.r.002",
+    "Calcarine sulcus.r.001",
+    "Calcarine sulcus.r.002",
+    "Central sulcus.r.001",
+    "Central sulcus.r.002",
+    "Inferior temporal sulcus? (Ant transv collateral sulcus*).",
+    "Inferior temporal sulcus? (Ant transv collateral sulcus*).r",
+    "Parieto-occipital sulcus.r.001",
+    "Parieto-occipital sulcus.r.002",
+    "Postcentral sulcus.r.001",
+    "Postcentral sulcus.r.002",
+    "Posterior transverse collateral sulcus.r.001",
+    "Posterior transverse collateral sulcus.r.002",
+    "Subparietal sulcus.r.001",
+    "Subparietal sulcus.r.002",
+    "Superior frontal sulcus.r.001",
+    "Superior frontal sulcus.r.002",
+    "Superior temporal sulcus.r.001",
+    "Superior temporal sulcus.r.002",
+    "Cingulate gyrus (Posteroventral part*).r.001",
+    "Cingulate gyrus (Posteroventral part*).r.002",
+    "Cingulate gyrus and sculcus (Posterior dorsal part).r.001",
+    "Cingulate gyrus and sculcus (Posterior dorsal part).r.002",
+    "Cingulate gyrus and sulcus (Middle anterior part).r.001",
+    "Cingulate gyrus and sulcus (Middle anterior part).r.002",
+    "Cingulate gyrus and sulcus (Middle posterior part).r.001",
+    "Cingulate gyrus and sulcus (Middle posterior part).r.002",
+    "Cingulate sulcus (Marginal part*).r.001",
+    "Cingulate sulcus (Marginal part*).r.002",
+    "Circular sulcus of insula.r.001",
+    "Circular sulcus of insula.r.002",
+    "Collateral sulcus.r.001",
+    "Collateral sulcus.r.002",
+    "Intraparietal sulcus.r.001",
+    "Intraparietal sulcus.r.002",
+    "Lat_Fis-ant-Horizont.1.001",
+    "Lat_Fis-ant-Horizont.L.002",
+    "Lat_Fis-ant-Vertical.1.001",
+    "Lat_Fis-ant-Vertical.L.002",
+    "Lat_Fis-post.1.001",
+    "Lat_Fis-post.1.002",
+    "Lateral occipitotemporal gyrus.r.001",
+    "Lateral occipitotemporal gyrus.r.002",
+    "Lunate sulcus (and inferior?*).r.001",
+    "Lunate sulcus (and inferior?*).r.002",
+    "Medial occipitotemporal gyrus.l (Parahippocampal*).r.001",
+    "Medial occipitotemporal gyrus.l (Parahippocampal*).r.002",
+    "Occipitotemporal sulcus (Lateral part*).r.001",
+    "Occipitotemporal sulcus (Lateral part*).r.002",
+    "Olfactory sulcus.r.001",
+    "Olfactory sulcus.r.002",
+    "Orbital part of inferior frontal gyrus.1.001",
+    "Orbital sulci (Lateral Orbital sulcus*).r.002",
+    "Paracentral sulcus.r.001",
+    "Paracentral sulcus.r.002",
+    "Parieto-occipital sulcus.r.001",
+    "Parieto-occipital sulcus.r.002",
+    "Precentral sulcus (inferior part)*.r.001",
+    "Precentral sulcus (inferior part)*.r.002",
+    "Precentral sulcus (Superior part)*.r.001",
+    "Precentral sulcus (Superior part)*.r.002",
+    "Sulcus interm_prim-Jensen.r.001",
+    "Sulcus interm_prim-Jensen.r.002",
+    "Transverse occipital sulcus (and Superior?*).r. 001",
+    "Transverse occipital sulcus (and Superior?*).r.002",
+    "Transverse temporal gyri.r.001",
+    "Transverse temporal gyri.r.002",
+    "Amygdaloid body.r.001",
+    "Amygdaloid body.r.002",
+    "Anterior commissure",
+    "Aqueduct of midbrain (Cerebral aqueduct)",
+    "Caudate nucleus.r.001",
+    "Caudate nucleus.r.002",
+    "Cerebellum.r.001",
+    "Cerebellum.r.002",
+    "Corpus callosum",
+    "Fornix.r.001",
+    "Fornix.r.002",
+    "Fourth ventricle",
+    "Globus pallidus.r.001",
+    "Globus pallidus.r.002",
+    "Habenula",
+    "Hippocampal commissure",
+    "Hippocampus.r.001",
+    "Hippocampus.r.002",
+    "Hypothalamus.r.001",
+    "Hypothalamus.r.002",
+    "Inferior colliculus.r.001",
+    "Inferior colliculus.r.002",
+    "Internal capsule.r.001",
+    "Internal capsule.r.002",
+    "Interpeduncular fossa.r.001",
+    "Interpeduncular fossa.r.002",
+    "Lateral geniculate body.r.001",
+    "Lateral geniculate body.r.002",
+    "Lateral ventricle.r.001",
+    "Lateral ventricle.r.002",
+    "Mamillary body.r.001",
+    "Mamillary body.r.002",
+    "Medial geniculate body.r.001",
+    "Medial geniculate body.r.002",
+    "Medulla oblongata.r.001",
+    "Medulla oblongata.r.002",
+    "Midbrain.r.001",
+    "Midbrain.r.002",
+    "Optic chiasm.L001",
+    "Optic chiasm.1.002",
+    "Optic tract.1.001",
+    "Optic tract.1.002",
+    "Pons.r.001",
+    "Pons.r.002",
+    "Posterior commissure",
+    "Putamen.r.001",
+    "Putamen.r.002",
+    "Septal nuclei",
+    "Septum pellucidum",
+    "Stria medullaris thalami.l.001",
+    "Stria medullaris thalami.1.002",
+    "Stria terminalis.r.001",
+    "Stria terminalis.r.002",
+    "Superior cerebellar peduncle.r.001",
+    "Superior cerebellar peduncle.r.002",
+    "Superior colliculus.r.001",
+    "Superior colliculus.r.002",
+    "Thalamus.r.001",
+    "Thalamus.r.002",
+    "Third ventricle",
+    "White matter of telencephalon.r.001",
+    "White matter of telencephalon.r.002"
+];
 }
+
+// Initialize the 3D model
+initialize3DModel();
