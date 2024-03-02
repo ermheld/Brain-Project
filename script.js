@@ -410,18 +410,33 @@ function initialize3DModel() {
     // Load the model
     var loader = new THREE.GLTFLoader();
     loader.load('Brain.glb', function(gltf) {
-        scene.add(gltf.scene);
+    scene.add(gltf.scene);
 
-        // Scale the model up if it's too small
-        gltf.scene.scale.set(10, 10, 10); // Adjust scale factors as needed
+    // Scale the model
+    gltf.scene.scale.set(10, 10, 10); // Adjust this value as needed
 
-        // Move the camera closer if the model is too small
-        camera.position.z = 2; // Adjust based on the model's size and scale
+    // Adjust the camera to focus on the model
+    camera.position.z = 5;
 
-        // Optional: Adjust the camera to look at the model
-        camera.lookAt(gltf.scene.position);
-    }, undefined, function(error) {
-        console.error(error);
+    // Optionally, adjust the model's position if it's not centered
+    gltf.scene.position.set(0, 0, 0); // Adjust as needed
+}, undefined, function(error) {
+    
+        
+    console.error(error);
+     window.addEventListener('resize', onWindowResize, false);
+
+   // Consider adding a resize event listener to adjust the renderer and camera on window resize
+    window.addEventListener('resize', onWindowResize, false);
+
+    function onWindowResize() {
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+    }
+
+});
+
     });
 
     // Animation loop
