@@ -391,6 +391,12 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function initialize3DModel() {
+    // Clear previous model if exists
+    scene.children.forEach(child => {
+        if (child.type === 'Mesh') {
+            scene.remove(child);
+        }
+    });
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
