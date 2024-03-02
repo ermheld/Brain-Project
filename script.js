@@ -401,11 +401,12 @@ function initialize3DModel() {
     container.appendChild(renderer.domElement);
 
     // Lighting adjustments
-    var ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
+    var ambientLight = new THREE.AmbientLight(0xcccccc, 0.5);
     scene.add(ambientLight);
-    var directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    directionalLight.position.set(1, 1, 0).normalize();
+    var directionalLight = new THREE.DirectionalLight(0xffffff, 0.8); // Adjust intensity as needed
+    directionalLight.position.set(0, 1, 1); // Adjust direction as needed
     scene.add(directionalLight);
+    directionalLight.target = model; // Assuming 'model' is your 3D model object
 
     // Load the model
     var loader = new THREE.GLTFLoader();
@@ -416,7 +417,10 @@ function initialize3DModel() {
     gltf.scene.scale.set(10, 10, 10); // Adjust this value as needed
 
     // Adjust the camera to focus on the model
-    camera.position.z = 5;
+    camera.position.z = 5; // Adjust based on the size and position of your model
+    camera.fov = 45; // Adjust the field of view as needed
+    camera.updateProjectionMatrix();
+
 
     // Optionally, adjust the model's position if it's not centered
     gltf.scene.position.set(0, 0, 0); // Adjust as needed
