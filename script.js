@@ -402,8 +402,9 @@ function initialize3DModel() {
 
     // Adjust renderer size to match the container or desired size
     var container = document.getElementById('brainModelContainer');
-    var renderer = new THREE.WebGLRenderer();
+    var renderer = new THREE.WebGLRenderer({ alpha: true }); // Set alpha to true for transparency
     renderer.setSize(container.clientWidth, container.clientHeight); // Use container's dimensions
+    renderer.setClearColor(0x000000, 0); // Clear background color alpha to 0
     container.appendChild(renderer.domElement);
 
     // Lighting adjustments
