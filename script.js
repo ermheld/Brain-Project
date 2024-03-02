@@ -406,7 +406,7 @@ function initialize3DModel() {
     var directionalLight = new THREE.DirectionalLight(0xffffff, 0.8); // Adjust intensity as needed
     directionalLight.position.set(0, 1, 1); // Adjust direction as needed
     scene.add(directionalLight);
-    directionalLight.target = model; // Assuming 'model' is your 3D model object
+    
 
     // Load the model
     var loader = new THREE.GLTFLoader();
@@ -414,7 +414,7 @@ function initialize3DModel() {
     scene.add(gltf.scene);
 
     // Scale the model
-    gltf.scene.scale.set(10, 10, 10); // Adjust this value as needed
+    gltf.scene.scale.set(100, 100, 100); // Adjust this value as needed
 
     // Adjust the camera to focus on the model
     camera.position.z = 5; // Adjust based on the size and position of your model
