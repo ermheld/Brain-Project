@@ -391,49 +391,43 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function initialize3DModel() {
-    // Clear previous model if exists
-    scene.children.forEach(child => {
-        if (child.type === 'Mesh') {
-            scene.remove(child);
-        }
-    });
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-    // Adjust renderer size to match the container or desired size
     var container = document.getElementById('brainModelContainer');
-    var renderer = new THREE.WebGLRenderer({ alpha: true }); // Set alpha to true for transparency
-    renderer.setSize(container.clientWidth, container.clientHeight); // Use container's dimensions
-    renderer.setClearColor(0x000000, 0); // Clear background color alpha to 0
+    var renderer = new THREE.WebGLRenderer({ alpha: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
-    // Lighting adjustments
     var ambientLight = new THREE.AmbientLight(0xcccccc, 0.5);
     scene.add(ambientLight);
-    var directionalLight = new THREE.DirectionalLight(0xffffff, 0.8); // Adjust intensity as needed
-    directionalLight.position.set(0, 1, 1); // Adjust direction as needed
+    var directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    directionalLight.position.set(0, 1, 1);
     scene.add(directionalLight);
 
     var model; // To store the loaded model
 
+    // Function to toggle the visibility of a model part
+    function toggleModelPartVisibility(partName, isVisible) {
+        model.scene.traverse(function (child) {
+            if (child.isMesh && child.name === partName) {
+                child.visible = isVisible;
+            }
+        });
+    }
+
     // Load the model
     var loader = new THREE.GLTFLoader();
-    loader.load('Brain.glb', function(gltf) {
+    loader.load('Brain.glb', function (gltf) {
         model = gltf; // Store the model globally
         scene.add(gltf.scene);
 
         // Scale the model
-        gltf.scene.scale.set(20, 20, 20); // Adjust this value as needed
+        gltf.scene.scale.set(20, 20, 20);
 
-        // Adjust the camera to focus on the model
-        camera.position.z = 20; // Adjust based on the size and position of your model
-        camera.position.y = 20;
-        camera.position.x = 20;
-        camera.fov = 45; // Adjust the field of view as needed
-        camera.updateProjectionMatrix();
-
-        // Optionally, adjust the model's position if it's not centered
-        gltf.scene.position.set(0, 0, 0); // Adjust as needed
+        // Adjust the camera
+        camera.position.set(20, 20, 20);
+        camera.lookAt(0, 0, 0);
 
         // Enable Orbit controls
         var controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -445,10 +439,9 @@ function initialize3DModel() {
         // Animation loop
         function animate() {
             requestAnimationFrame(animate);
-            controls.update(); // required if controls.enableDamping or controls.autoRotate are set to true
+            controls.update();
             renderer.render(scene, camera);
         }
-
         animate();
     });
 
@@ -461,14 +454,6 @@ function initialize3DModel() {
         renderer.setSize(container.clientWidth, container.clientHeight);
     }
 
-    // Function to toggle the visibility of a model part
-    function toggleModelPartVisibility(partName, isVisible) {
-        model.scene.traverse(function (child) {
-            if (child.isMesh && child.name === partName) {
-                child.visible = isVisible;
-            }
-        });
-    }
 
     // List of parts
     var parts = [
