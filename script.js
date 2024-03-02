@@ -393,47 +393,38 @@ document.addEventListener("DOMContentLoaded", function() {
 function initialize3DModel() {
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-    // Adjust renderer size to match the container or desired size
-    var container = document.getElementById('brainModelContainer');
     var renderer = new THREE.WebGLRenderer();
-    renderer.setSize(container.clientWidth, container.clientHeight); // Use container's dimensions
+    var container = document.getElementById('brainModelContainer');
+
+    renderer.setSize(container.clientWidth, container.clientHeight);
     container.appendChild(renderer.domElement);
 
-    // Lighting adjustments
     var ambientLight = new THREE.AmbientLight(0xcccccc, 0.5);
     scene.add(ambientLight);
-    var directionalLight = new THREE.DirectionalLight(0xffffff, 0.8); // Adjust intensity as needed
-    directionalLight.position.set(0, 1, 1); // Adjust direction as needed
+
+    var directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    directionalLight.position.set(0, 1, 1);
     scene.add(directionalLight);
-    
 
-    // Load the model
-    var loader = new THREE.GLTFLoader();
-    loader.load('Brain.glb', function(gltf) {
-    scene.add(gltf.scene);
-
-    // Scale the model
-    gltf.scene.scale.set(20, 20, 20); // Adjust this value as needed
-
-    // Adjust the camera to focus on the model
-    camera.position.z =20; // Adjust based on the size and position of your model
-    camera.position.y =20;
-    camera.position.x =20;    
-    camera.fov = 45; // Adjust the field of view as needed
+    camera.position.set(20, 20, 20);
+    camera.fov = 45;
     camera.updateProjectionMatrix();
 
+    var loader = new THREE.GLTFLoader();
+    loader.load('Brain.glb', function(gltf) {
+        scene.add(gltf.scene);
+        gltf.scene.scale.set(20, 20, 20);
+        gltf.scene.position.set(0, 0, 0);
+    }, undefined, function(error) {
+        console.error(error);
+    });
 
-    // Optionally, adjust the model's position if it's not centered
-    gltf.scene.position.set(0, 0, 0); // Adjust as needed
-}, undefined, function(error) {
-    
-        
-    console.error(error);
-     window.addEventListener('resize', onWindowResize, false);
-
-   // Consider adding a resize event listener to adjust the renderer and camera on window resize
-    window.addEventListener('resize', onWindowResize, false);
+    // OrbitControls need to be included after the three.js and OrbitControls.js scripts
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.25;
+    controls.screenSpacePanning = false;
+    controls.maxPolarAngle = Math.PI / 2;
 
     function onWindowResize() {
         camera.aspect = container.clientWidth / container.clientHeight;
@@ -441,23 +432,13 @@ function initialize3DModel() {
         renderer.setSize(container.clientWidth, container.clientHeight);
     }
 
-});
+    window.addEventListener('resize', onWindowResize, false);
 
+    function animate() {
+        requestAnimationFrame(animate);
+        controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
+        renderer.render(scene, camera);
+    }
 
-// After setting up the camera, scene, and renderer
-var controls = new THREE.OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.dampingFactor = 0.25;
-controls.screenSpacePanning = false;
-controls.maxPolarAngle = Math.PI / 2;
-
-    
-// Animation loop
-function animate() {
-    requestAnimationFrame(animate);
-    controls.update(); // required if controls.enableDamping or controls.autoRotate are set to true
-    renderer.render(scene, camera);
+    animate();
 }
-
-animate();
-
