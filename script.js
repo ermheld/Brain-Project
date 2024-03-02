@@ -393,24 +393,38 @@ document.addEventListener("DOMContentLoaded", function() {
 function initialize3DModel() {
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    var renderer = new THREE.WebGLRenderer();
-    renderer.setSize(document.getElementById('brainModelContainer').clientWidth, document.getElementById('brainModelContainer').clientHeight);
-    document.getElementById('brainModelContainer').appendChild(renderer.domElement);
 
+    // Adjust renderer size to match the container or desired size
+    var container = document.getElementById('brainModelContainer');
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(container.clientWidth, container.clientHeight); // Use container's dimensions
+    container.appendChild(renderer.domElement);
+
+    // Lighting adjustments
     var ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
     scene.add(ambientLight);
     var directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
     directionalLight.position.set(1, 1, 0).normalize();
     scene.add(directionalLight);
 
+    // Load the model
     var loader = new THREE.GLTFLoader();
     loader.load('Brain.glb', function(gltf) {
         scene.add(gltf.scene);
-        camera.position.z = 5; // Adjust based on the size of your model
+
+        // Scale the model up if it's too small
+        gltf.scene.scale.set(10, 10, 10); // Adjust scale factors as needed
+
+        // Move the camera closer if the model is too small
+        camera.position.z = 2; // Adjust based on the model's size and scale
+
+        // Optional: Adjust the camera to look at the model
+        camera.lookAt(gltf.scene.position);
     }, undefined, function(error) {
         console.error(error);
     });
 
+    // Animation loop
     function animate() {
         requestAnimationFrame(animate);
         renderer.render(scene, camera);
