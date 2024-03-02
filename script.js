@@ -450,6 +450,7 @@ controls.enableDamping = true;
 controls.dampingFactor = 0.25;
 controls.screenSpacePanning = false;
 controls.maxPolarAngle = Math.PI / 2;
+
     
 // Animation loop
 function animate() {
