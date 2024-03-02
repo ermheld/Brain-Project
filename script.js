@@ -418,6 +418,8 @@ function initialize3DModel() {
 
     // Adjust the camera to focus on the model
     camera.position.z =20; // Adjust based on the size and position of your model
+    camera.position.y =20;
+    camera.position.x =20;    
     camera.fov = 45; // Adjust the field of view as needed
     camera.updateProjectionMatrix();
 
@@ -441,10 +443,20 @@ function initialize3DModel() {
 
 });
 
-    // Animation loop
-    function animate() {
-        requestAnimationFrame(animate);
-        renderer.render(scene, camera);
-    }
-    animate();
+
+// After setting up the camera, scene, and renderer
+var controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.25;
+controls.screenSpacePanning = false;
+controls.maxPolarAngle = Math.PI / 2;
+    
+// Animation loop
+function animate() {
+    requestAnimationFrame(animate);
+    controls.update(); // required if controls.enableDamping or controls.autoRotate are set to true
+    renderer.render(scene, camera);
 }
+
+animate();
+
