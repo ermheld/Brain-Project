@@ -414,10 +414,10 @@ function initialize3DModel() {
     scene.add(gltf.scene);
 
     // Scale the model
-    gltf.scene.scale.set(100, 100, 100); // Adjust this value as needed
+    gltf.scene.scale.set(20, 20, 20); // Adjust this value as needed
 
     // Adjust the camera to focus on the model
-    camera.position.z = 5; // Adjust based on the size and position of your model
+    camera.position.z =20; // Adjust based on the size and position of your model
     camera.fov = 45; // Adjust the field of view as needed
     camera.updateProjectionMatrix();
 
