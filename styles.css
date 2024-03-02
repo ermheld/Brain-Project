@@ -175,3 +175,9 @@ input:checked + .slider:before {
 .structure p, .structure h4 {
     font-family: "Helvetica Neue, Helvetica, Arial, sans-serif";
 }
+#brainModelContainer {
+  width: 800px; /* Adjust to fit your layout */
+  height: 600px; /* Adjust to fit your layout */
+  margin: 0 auto; /* Center the container */
+}
+
