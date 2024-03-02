@@ -437,8 +437,6 @@ function initialize3DModel() {
 
 });
 
-    });
-
     // Animation loop
     function animate() {
         requestAnimationFrame(animate);
